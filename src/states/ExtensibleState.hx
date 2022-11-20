@@ -1,6 +1,7 @@
 package states;
 
 import flixel.FlxState;
+import flixel.FlxSubState;
 
 /**
  * a State that is widely used by the other game states
@@ -8,7 +9,8 @@ import flixel.FlxState;
  */
 class ExtensibleState extends FlxState
 {
-	public var score:Int = 0;
+	// for selecting items on a menu;
+	public var selection:Int = 0;
 
 	override public function create()
 	{
@@ -19,4 +21,26 @@ class ExtensibleState extends FlxState
 	{
 		super.update(elapsed);
 	}
+
+	public function updateSelection(newSelection:Int = 0)
+		selection = newSelection;
+}
+
+class ExtensibleSubstate extends FlxSubState
+{
+	// for selecting items on a menu;
+	public var selection:Int = 0;
+
+	override public function create()
+	{
+		super.create();
+	}
+
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+	}
+
+	public function updateSelection(newSelection:Int = 0)
+		selection = newSelection;
 }

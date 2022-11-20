@@ -8,7 +8,7 @@ import flixel.text.FlxText;
  */
 class PlayState extends ExtensibleState
 {
-	private var displayText:String = "Press 1 to Toggle FPS Counter\nPress 2 to Toggle Memory Counter\n\nthose preferences should be saved.";
+	private var displayText:String = "Hello World!";
 
 	override public function create()
 	{
@@ -22,17 +22,5 @@ class PlayState extends ExtensibleState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		if (FlxG.keys.justPressed.ONE)
-		{
-			Start.preferences.set("Show Framerate", !Start.getPref("Show Framerate"));
-			Start.savePrefs();
-		}
-
-		if (FlxG.keys.justPressed.TWO)
-		{
-			Start.preferences.set("Show Memory", !Start.getPref("Show Memory"));
-			Start.savePrefs();
-		}
 	}
 }

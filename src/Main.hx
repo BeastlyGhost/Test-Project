@@ -8,7 +8,7 @@ import openfl.display.Sprite;
 
 class Main extends Sprite
 {
-	public static var initialState:Class<FlxState> = states.PlayState;
+	public static var initialState:Class<FlxState> = states.MenuState;
 
 	public static function main():Void
 		Lib.current.addChild(new Main());
