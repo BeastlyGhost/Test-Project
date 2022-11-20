@@ -1,6 +1,6 @@
 package;
 
-import base.debug.DebugInfo;
+import base.DebugInfo;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Lib;
