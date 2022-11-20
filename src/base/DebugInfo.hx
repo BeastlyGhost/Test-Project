@@ -14,7 +14,7 @@ import openfl.text.TextFormat;
 class DebugInfo extends TextField
 {
 	public var times:Array<Float> = [];
-	public var memoryPeak:UInt = 0;
+	public var memoryTotal:UInt = 0;
 
 	public function new(x:Float, y:Float)
 	{
@@ -26,13 +26,29 @@ class DebugInfo extends TextField
 		autoSize = LEFT;
 		selectable = false;
 
-		defaultTextFormat = new TextFormat(Assets.getFont("vcr"), 12, -1);
+		defaultTextFormat = new TextFormat(Assets.getFont("vcr"), 16, -1);
 		text = "";
 
 		width = 150;
 		height = 70;
 
 		addEventListener(Event.ENTER_FRAME, update);
+	}
+
+	static final intervalArray:Array<String> = ['b', 'kb', 'mb', 'gb', 'tb'];
+
+	inline public static function getInterval(num:UInt):String
+	{
+		var size:Float = num;
+		var data = 0;
+		while (size > 1024 && data < intervalArray.length - 1)
+		{
+			data++;
+			size = size / 1024;
+		}
+
+		size = Math.round(size * 100) / 100;
+		return size + intervalArray[data];
 	}
 
 	private function update(_:Event)
@@ -43,10 +59,15 @@ class DebugInfo extends TextField
 			times.shift();
 
 		var memory = System.totalMemory;
-		if (memory > memoryPeak)
-			memoryPeak = memory;
+		if (memory > memoryTotal)
+			memoryTotal = memory;
 
 		if (visible)
-			text = "FPS: " + times.length;
+		{
+			text = "";
+			text += "FPS: " + times.length;
+			text += "\nMemory: " + getInterval(memory);
+			text += "\nTotal: " + getInterval(memoryTotal);
+		}
 	}
 }

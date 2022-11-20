@@ -29,7 +29,13 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
-	<source path="source" />
+	<set name="BUILD_DIR" value="export/debug" if="debug" />
+	<set name="BUILD_DIR" value="export/release" unless="debug" />
+
+	<set name="BUILD_DIR" value="export/debug-x86" if="HXCPP_M32 debug" />
+	<set name="BUILD_DIR" value="export/release-x86" if="HXCPP_M32 release" />
+
+	<source path="src" />
 	<assets path="assets" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
