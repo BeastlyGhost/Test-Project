@@ -11,7 +11,7 @@ class PlayState extends ExtensibleState
 	{
 		super.create();
 
-		FlxG.sound.playMusic(Assets.getSound("LunchboxScary", "music"));
+		FlxG.sound.play(Assets.getSound("test-sound", "sounds"));
 	}
 
 	override public function update(elapsed:Float)
