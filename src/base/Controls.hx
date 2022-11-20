@@ -6,6 +6,7 @@ import lime.app.Event;
 import openfl.events.KeyboardEvent;
 import openfl.ui.Keyboard;
 
+// Enumerator for defining the Current State of a Key;
 enum KeyState
 {
 	PRESSED;
@@ -14,9 +15,12 @@ enum KeyState
 
 typedef KeyCall = (Int, KeyState) -> Void; // ID in Array, State -> Function;
 typedef BindCall = (String, Int, KeyState) -> Void; // Name, ID in Array, State -> Function;
-// for convenience;
-typedef Key = Null<Int>;
+typedef Key = Null<Int>; // for convenience;
 
+/**
+ * the Controls Class manages the main inputs for the game;
+ * it can be used by every other class for any type of event;
+ */
 class Controls
 {
 	//
