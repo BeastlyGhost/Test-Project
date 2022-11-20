@@ -25,7 +25,7 @@ class Start extends FlxState
 
 	function triggerSplash():Void
 	{
-		var bianca:FlxSprite = new FlxSprite().loadGraphic(Assets.getImage("test-image"));
+		var bianca:FlxSprite = new FlxSprite().loadGraphic(Assets.getAsset("test-image", IMAGE, "images"));
 		bianca.setGraphicSize(Std.int(bianca.width * 0.6));
 		bianca.screenCenter(XY);
 		bianca.x -= 20;

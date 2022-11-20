@@ -26,7 +26,7 @@ class DebugInfo extends TextField
 		autoSize = LEFT;
 		selectable = false;
 
-		defaultTextFormat = new TextFormat(Assets.getFont("vcr"), 16, -1);
+		defaultTextFormat = new TextFormat(Assets.getAsset("vcr", FONT, "fonts"), 16, -1);
 		text = "";
 
 		width = 150;
