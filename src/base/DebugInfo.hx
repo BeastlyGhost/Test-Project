@@ -35,7 +35,7 @@ class DebugInfo extends TextField
 		addEventListener(Event.ENTER_FRAME, update);
 	}
 
-	static final intervalArray:Array<String> = ['b', 'kb', 'mb', 'gb', 'tb'];
+	static final intervalArray:Array<String> = ['B', 'KB', 'MB', 'GB', 'TB'];
 
 	inline public static function getInterval(num:UInt):String
 	{
@@ -48,7 +48,7 @@ class DebugInfo extends TextField
 		}
 
 		size = Math.round(size * 100) / 100;
-		return size + intervalArray[data];
+		return '$size ${intervalArray[data]}';
 	}
 
 	private function update(_:Event)
@@ -64,10 +64,12 @@ class DebugInfo extends TextField
 
 		if (visible)
 		{
-			text = "";
-			text += "FPS: " + times.length;
-			text += "\nMemory: " + getInterval(memory);
-			text += "\nTotal: " + getInterval(memoryTotal);
+			text = ""; // reset to default;
+
+			if (Start.getPref("Show Framerate"))
+				text += '${times.length} FPS\n';
+			if (Start.getPref("Show Memory"))
+				text += '${getInterval(memory)} // ${getInterval(memoryTotal)}';
 		}
 	}
 }

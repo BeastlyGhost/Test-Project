@@ -12,9 +12,45 @@ import flixel.tweens.FlxTween;
  */
 class Start extends FlxState
 {
+	public static var preferences:Map<String, Dynamic> = [
+		//
+		"Show Framerate" => false,
+		"Show Memory" => true,
+	];
+
+	/**
+	 * [Returns the specified preference from within the preferences map]
+	 * @param name the `name` of your desired preference
+	 * @return the default / current parameter for your preference
+	 */
+	public static function getPref(name:String)
+	{
+		if (preferences.exists(name))
+			return preferences.get(name);
+		//
+		trace('Preference "$name" does not exist in the preferences map.');
+		return null;
+	}
+
+	public static function savePrefs()
+	{
+		FlxG.save.bind("Ghost");
+		FlxG.save.data.preferences = preferences;
+		// FlxG.save.data.flush();
+	}
+
+	public static function loadPrefs()
+	{
+		FlxG.save.bind("Ghost");
+		if (FlxG.save.data.preferences != null)
+			preferences = FlxG.save.data.preferences;
+	}
+
 	override public function create()
 	{
 		super.create();
+
+		loadPrefs();
 
 		FlxG.fixedTimestep = true;
 		FlxG.mouse.useSystemCursor = true;
