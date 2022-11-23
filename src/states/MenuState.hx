@@ -56,9 +56,6 @@ class MenuState extends ExtensibleState
 			button.color = 0xFFFFFFFF;
 		});
 
-		if (selection >= menuOptions.length)
-			selection = 0;
-		if (selection < 0)
-			selection = menuOptions.length - 1;
+		selection = FlxMath.wrap(Math.floor(selection) + newSelection, 0, menuOptions.length - 1);
 	}
 }

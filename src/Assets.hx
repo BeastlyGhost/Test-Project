@@ -3,12 +3,13 @@ package;
 import openfl.media.Sound;
 import sys.FileSystem;
 
-// Abstract Enumerator for Asset Types;
-enum abstract AssetType(String) to String
+// Enumerator for Asset Types;
+enum AssetType
 {
-	var IMAGE = "image";
-	var SOUND = "sound";
-	var FONT = "font";
+	IMAGE;
+	VIDEO;
+	SOUND;
+	FONT;
 }
 
 /**
@@ -23,20 +24,14 @@ class Assets
 	 * @param directory the directory we should look for the specified asset name
 	 * @return your asset path along with the asset and its extensions (if null, then nothing)
 	 */
-	public static function getAsset(asset:String, type:AssetType, directory:String):String
+	public static function getAsset(asset:String, type:AssetType, directory:String):Dynamic
 	{
 		//
 		var path = mainPath('$directory/$asset', type);
 		switch (type)
 		{
-			/* i have no use for these yet;
-				case IMAGE:
-					return;
-				case SOUND:
-					return;
-				case FONT:
-					return;
-			 */
+			case SOUND:
+				return getSound(asset, directory);
 			default:
 				if (FileSystem.exists(path))
 					return path;
@@ -80,6 +75,8 @@ class Assets
 		{
 			case IMAGE:
 				extensions = ['.png', '.jpg'];
+			case VIDEO:
+				extensions = ['.mp4'];
 			case FONT:
 				extensions = [".ttf", ".otf"];
 			case SOUND:
