@@ -2,6 +2,7 @@ package states;
 
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.math.FlxMath;
 import flixel.text.FlxText;
 
 class MenuState extends ExtensibleState
@@ -31,9 +32,9 @@ class MenuState extends ExtensibleState
 		super.update(elapsed);
 
 		if (Controls.getPressEvent("down"))
-			updateSelection(selection - 1);
+			updateSelection(1);
 		if (Controls.getPressEvent("up"))
-			updateSelection(selection + 1);
+			updateSelection(-1);
 
 		if (Controls.getPressEvent("accept"))
 		{

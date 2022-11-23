@@ -67,7 +67,7 @@ class Start extends FlxState
 		bianca.x -= 20;
 		add(bianca);
 
-		FlxG.sound.play(Assets.getSound("test-sound", "sounds"));
+		FlxG.sound.play(Assets.getAsset("test-sound", SOUND, "sounds"));
 
 		FlxTween.tween(bianca, {alpha: 0}, 2, {
 			ease: FlxEase.sineOut,

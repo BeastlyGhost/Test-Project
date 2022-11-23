@@ -31,7 +31,7 @@ class Assets
 		switch (type)
 		{
 			case SOUND:
-				return getSound(asset, directory);
+				return getSound(path);
 			default:
 				if (FileSystem.exists(path))
 					return path;
@@ -45,9 +45,9 @@ class Assets
 	 * @param asset the sound file name
 	 * @param folder the folder name that we should look for
 	 */
-	public static function getSound(asset:String, folder:String)
+	public static function getSound(fromDirectory:String)
 	{
-		return Sound.fromFile(mainPath('$folder/$asset', SOUND));
+		return Sound.fromFile(fromDirectory);
 	}
 
 	/**

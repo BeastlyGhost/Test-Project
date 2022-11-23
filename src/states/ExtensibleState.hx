@@ -22,8 +22,7 @@ class ExtensibleState extends FlxState
 		super.update(elapsed);
 	}
 
-	public function updateSelection(newSelection:Int = 0)
-		selection = newSelection;
+	public function updateSelection(newSelection:Int = 0) {}
 }
 
 class ExtensibleSubstate extends FlxSubState
@@ -41,6 +40,5 @@ class ExtensibleSubstate extends FlxSubState
 		super.update(elapsed);
 	}
 
-	public function updateSelection(newSelection:Int = 0)
-		selection = newSelection;
+	public function updateSelection(newSelection:Int = 0) {}
 }
