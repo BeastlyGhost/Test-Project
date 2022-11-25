@@ -9,7 +9,10 @@ import openfl.media.Sound;
 import openfl.system.System;
 import sys.FileSystem;
 
-// Enumerator for Asset Types;
+/*
+	Enumerator for Asset Types, right now, there isn't much going on with this
+	it just defines what Asset Type we are dealing with, and gives extensions to said asset type
+*/
 enum AssetType
 {
 	IMAGE;
@@ -18,7 +21,10 @@ enum AssetType
 	FONT;
 }
 
-// Typedefine for Cached Assets, simply put, it defines what `type` a asset is, and what data it comes with
+/*
+	Typedefine for Cached Assets, simply put, it defines what `type` an asset is, and what data it comes with
+	data can be anything, as we are going to use it to later `grab` it in order to manage said data
+*/
 typedef CacheableAsset =
 {
 	var type:AssetType;
@@ -70,6 +76,8 @@ class AssetHandler
 		var path = grabRoot('$directory/$asset', type);
 		switch (type)
 		{
+			case IMAGE:
+				return grabGraphic(path);
 			case SOUND:
 				return grabSound(path);
 			default:
@@ -80,7 +88,7 @@ class AssetHandler
 		return null;
 	}
 
-	public static function grabImage(outputDir:String):FlxGraphic
+	public static function grabGraphic(outputDir:String):FlxGraphic
 	{
 		if (!mappedAssets[IMAGE].exists(outputDir))
 		{
