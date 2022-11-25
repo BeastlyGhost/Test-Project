@@ -88,6 +88,11 @@ class AssetHandler
 		return null;
 	}
 
+	/**
+	 * [Returns a graphic asset from the specified directory]
+	 * @param outputDir the directory we should look for
+	 * @return uses FlxGraphic's `fromBitmapData` function to return your graphic asset
+	 */
 	public static function grabGraphic(outputDir:String):FlxGraphic
 	{
 		if (!mappedAssets[IMAGE].exists(outputDir))
