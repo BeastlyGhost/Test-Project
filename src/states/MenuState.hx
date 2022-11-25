@@ -7,12 +7,19 @@ import flixel.text.FlxText;
 
 class MenuState extends ExtensibleState
 {
+	public var selector:FlxText;
 	public var textGroup:FlxTypedGroup<FlxText>;
 	public var menuOptions:Array<String> = ["Show Framerate", "Show Memory", "Leave Settings"];
 
 	override public function create()
 	{
 		super.create();
+
+		// set the wrappable group to our options group
+		wrappableGroup = menuOptions;
+
+		selector = new FlxText(0, 0, 0, '>', 32);
+		add(selector);
 
 		textGroup = new FlxTypedGroup<FlxText>();
 		add(textGroup);
@@ -41,10 +48,7 @@ class MenuState extends ExtensibleState
 			if (textGroup.members[selection].text == "Leave Settings")
 				FlxG.switchState(new PlayState());
 			else
-			{
-				trace("String: " + textGroup.members[selection].text);
 				Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
-			}
 		}
 	}
 
@@ -57,6 +61,16 @@ class MenuState extends ExtensibleState
 			button.color = 0xFFFFFFFF;
 		});
 
-		selection = FlxMath.wrap(Math.floor(selection) + newSelection, 0, menuOptions.length - 1);
+		var currentSelection:Int = 0;
+		for (text in textGroup.members)
+		{
+			// pointer follows your selected item
+			if (currentSelection == selection)
+			{
+				selector.x = text.x - 35;
+				selector.y = text.y;
+			}
+			currentSelection++;
+		}
 	}
 }

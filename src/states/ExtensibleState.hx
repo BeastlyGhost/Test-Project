@@ -2,6 +2,7 @@ package states;
 
 import flixel.FlxState;
 import flixel.FlxSubState;
+import flixel.math.FlxMath;
 
 /**
  * a State that is widely used by the other game states
@@ -9,8 +10,15 @@ import flixel.FlxSubState;
  */
 class ExtensibleState extends FlxState
 {
-	// for selecting items on a menu;
+	/*
+		Defines the Current Selected Item on a State
+	 */
 	public var selection:Int = 0;
+
+	/*
+		Defines the `selection` limits
+	 */
+	public var wrappableGroup:Array<Dynamic> = [];
 
 	override public function create()
 	{
@@ -22,13 +30,23 @@ class ExtensibleState extends FlxState
 		super.update(elapsed);
 	}
 
-	public function updateSelection(newSelection:Int = 0) {}
+	public function updateSelection(newSelection:Int = 0)
+	{
+		selection = FlxMath.wrap(Math.floor(selection) + newSelection, 0, wrappableGroup.length - 1);
+	}
 }
 
 class ExtensibleSubstate extends FlxSubState
 {
-	// for selecting items on a menu;
+	/*
+		Defines the Current Selected Item on a State
+	 */
 	public var selection:Int = 0;
+
+	/*
+		Defines the `selection` limits
+	 */
+	public var wrappableGroup:Array<Dynamic> = [];
 
 	override public function create()
 	{
@@ -40,5 +58,8 @@ class ExtensibleSubstate extends FlxSubState
 		super.update(elapsed);
 	}
 
-	public function updateSelection(newSelection:Int = 0) {}
+	public function updateSelection(newSelection:Int = 0)
+	{
+		selection = FlxMath.wrap(Math.floor(selection) + newSelection, 0, wrappableGroup.length - 1);
+	}
 }
