@@ -41,6 +41,11 @@ typedef CacheableAsset =
 class AssetHandler
 {
 	/*
+		Stores only user-preferred assets that shoud not be cleared when `clear` is called
+	**/
+	public static var persistentAssets:Array<String> = [];
+
+	/*
 		Stores Tracked Assets on a Map
 
 		-----------------------
@@ -61,11 +66,6 @@ class AssetHandler
 		Stores every tracked asset in an Array, useful for cleaning up later on
 	**/
 	public static var trackedAssets:Array<String> = [];
-
-	/*
-		Stores only user-preferred assets that shoud not be cleared when `clear` is called
-	**/
-	public static var persistentAssets:Array<String> = [];
 
 	/**
 	 * [Returns a specified asset]
@@ -99,7 +99,7 @@ class AssetHandler
 	}
 
 	/**
-	 * [Stores a graphic asset from the specified directory]
+	 * [Stores a graphic asset from the specified directory, then returns it]
 	 * @param outputDir the directory we should look for
 	 * @return uses FlxGraphic's `fromBitmapData` function to return your graphic asset
 	**/
