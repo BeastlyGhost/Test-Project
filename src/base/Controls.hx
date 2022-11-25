@@ -13,14 +13,14 @@ enum KeyState
 	RELEASED;
 }
 
-typedef KeyCall = (Int, KeyState) -> Void; // ID in Array, State -> Function;
-typedef BindCall = (String, Int, KeyState) -> Void; // Name, ID in Array, State -> Function;
-typedef Key = Null<Int>; // for convenience;
+typedef KeyCall = (Int, KeyState) -> Void; // ID in Array, State -> Function
+typedef BindCall = (String, Int, KeyState) -> Void; // Name, ID in Array, State -> Function
+typedef Key = Null<Int>; // for convenience
 
 /**
- * the Controls Class manages the main inputs for the game;
- * it can be used by every other class for any type of event;
- */
+ * the Controls Class manages the main inputs for the game
+ * it can be used by every other class for any type of event
+**/
 class Controls
 {
 	//
@@ -30,7 +30,6 @@ class Controls
 
 	public static var keyEventPress:Event<BindCall> = new Event<BindCall>();
 	public static var keyEventRelease:Event<BindCall> = new Event<BindCall>();
-	// used by playstate for main controls;
 	public static var keyEventTrigger:Event<BindCall> = new Event<BindCall>();
 
 	public static var defaultActions:Map<String, Array<Key>> = [
@@ -160,7 +159,7 @@ class Controls
 
 	public static function getPressEvent(action:String, type:String = 'justPressed'):Bool
 	{
-		// stores the last registered key event;
+		// stores the last registered key event
 		var lastEvent:String = 'justReleased';
 
 		// check event keys
@@ -170,7 +169,7 @@ class Controls
 
 			lastEvent = type;
 
-			// checks if the event is the one specified on the type parameter for the action we want;
+			// checks if the event is the one specified on the type parameter for the action we want
 			if (Reflect.field(FlxG.keys, 'any' + type.charAt(0).toUpperCase() + type.substr(1))(keys))
 				return true;
 		}

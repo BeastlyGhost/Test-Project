@@ -9,13 +9,13 @@ import flixel.tweens.FlxTween;
 /**
  * Starting Class for the game
  * used to set up useful functions and variables for the main game!
- */
+**/
 class Start extends FlxState
 {
 	/*
 		the Preferences Map sets up settings and default setting parameters
 		it can be used alongside a menu for changing said paramaters to new ones
-	 */
+	**/
 	public static var preferences:Map<String, Dynamic> = [
 		//
 		"Show Framerate" => true,
@@ -27,7 +27,7 @@ class Start extends FlxState
 	 * [Returns the specified preference from within the preferences map]
 	 * @param name the `name` of your desired preference
 	 * @return the default / current parameter for your preference
-	 */
+	**/
 	public static function getPref(name:String)
 	{
 		if (preferences.exists(name))
@@ -39,7 +39,7 @@ class Start extends FlxState
 
 	/**
 	 * [Saves your game preferences with "Ghost" as the save file name]
-	 */
+	**/
 	public static function savePrefs()
 	{
 		FlxG.save.bind("Ghost");
@@ -49,7 +49,7 @@ class Start extends FlxState
 
 	/**
 	 * [Loads your game preferences with "Ghost" as the save file name]
-	 */
+	**/
 	public static function loadPrefs()
 	{
 		FlxG.save.bind("Ghost");

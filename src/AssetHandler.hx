@@ -9,10 +9,10 @@ import openfl.media.Sound;
 import openfl.system.System;
 import sys.FileSystem;
 
-/*
-	Enumerator for Asset Types, right now, there isn't much going on with this
-	it just defines what Asset Type we are dealing with, and gives extensions to said asset type
-*/
+/**
+ * Enumerator for Asset Types, right now, there isn't much going on with this
+ * it just defines what Asset Type we are dealing with, and gives extensions to said asset type
+**/
 enum AssetType
 {
 	IMAGE;
@@ -21,10 +21,10 @@ enum AssetType
 	FONT;
 }
 
-/*
-	Typedefine for Cached Assets, simply put, it defines what `type` an asset is, and what data it comes with
-	data can be anything, as we are going to use it to later `grab` it in order to manage said data
-*/
+/**
+ * Typedefine for Cached Assets, simply put, it defines what `type` an asset is, and what data it comes with
+ * data can be anything, as we are going to use it to later `grab` it in order to manage said data
+**/
 typedef CacheableAsset =
 {
 	var type:AssetType;
@@ -33,7 +33,7 @@ typedef CacheableAsset =
 
 /**
  * This is the Assets Class, meant to allow access to assets, and manage used ones
- */
+**/
 class AssetHandler
 {
 	/*
@@ -45,7 +45,7 @@ class AssetHandler
 		instead of creating multiple maps for various type of assets
 		having a single one could be somewhat easier to manage
 		@BeastlyGhost
-	 */
+	**/
 	public static var mappedAssets:Map<AssetType, Map<String, CacheableAsset>> = [
 		//
 		IMAGE => new Map<String, CacheableAsset>(),
@@ -55,12 +55,12 @@ class AssetHandler
 
 	/*
 		Stores every tracked asset in an Array, useful for cleaning up later on
-	 */
+	**/
 	public static var trackedAssets:Array<String> = [];
 
 	/*
 		Stores only user-preferred assets that shoud not be cleared when `clear` is called
-	 */
+	**/
 	public static var persistentAssets:Array<String> = [];
 
 	/**
@@ -69,7 +69,7 @@ class AssetHandler
 	 * @param type the asset type (like: IMAGE, SOUND, FONT for example)
 	 * @param directory the directory we should look for the specified asset name
 	 * @return your asset path along with the asset and its extensions (if null, then nothing)
-	 */
+	**/
 	public static function grabAsset(asset:String, type:AssetType, directory:String):Dynamic
 	{
 		//
@@ -92,7 +92,7 @@ class AssetHandler
 	 * [Returns a graphic asset from the specified directory]
 	 * @param outputDir the directory we should look for
 	 * @return uses FlxGraphic's `fromBitmapData` function to return your graphic asset
-	 */
+	**/
 	public static function grabGraphic(outputDir:String):FlxGraphic
 	{
 		if (!mappedAssets[IMAGE].exists(outputDir))
@@ -111,7 +111,7 @@ class AssetHandler
 	 * [Returns a sound from the specified directory]
 	 * @param outputDir the directory we should look for
 	 * @return uses OpenFL's sound feature to return a sound from the specified directory
-	 */
+	**/
 	public static function grabSound(outputDir:String):Sound
 	{
 		if (!mappedAssets[SOUND].exists(outputDir))
@@ -123,7 +123,7 @@ class AssetHandler
 	/**
 	 * [Simply put, this clears all tracked assets that exist on the `trackedAssets` array]
 	 * @param clearMappedImages whether images should also be cleared along with sounds
-	 */
+	**/
 	public static function clear(clearMappedImages:Bool)
 	{
 		if (clearMappedImages)
@@ -172,7 +172,7 @@ class AssetHandler
 	 * @param directory folder that we should return along with the main assets folder
 	 * @param type the type of asset you need, leave it as blank for returning a directory instead
 	 * @return the main assets directory with a specified subdirectory (and extension, if type is given)
-	 */
+	**/
 	public static function grabRoot(directory:String, ?type:AssetType):String
 	{
 		//
@@ -187,7 +187,7 @@ class AssetHandler
 	 * @param dir the directory we should get the extension from
 	 * @param type the asset type (like: image, font, sound)
 	 * @return if extension is valid, returns your path with the extension, else only the path
-	 */
+	**/
 	public static function getExtensions(dir:String, type:AssetType):String
 	{
 		var extensions:Array<String> = null;

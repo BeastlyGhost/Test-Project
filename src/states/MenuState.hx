@@ -5,6 +5,11 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 
+/**
+ * the Menu State serves as a base menu that will be expanded later on
+ * right now, it simply shows text options that do a specific action
+ * such as toggling the framerate counter, or setting your keybinds
+**/
 class MenuState extends ExtensibleState
 {
 	var selector:FlxText;
@@ -13,8 +18,8 @@ class MenuState extends ExtensibleState
 		"Show Framerate",
 		"Show Memory",
 		"Show Objects",
-		"Configure Controls",
-		"Leave Settings"
+		"Set Keybinds",
+		"Save and Leave"
 	];
 
 	override function create()
@@ -53,9 +58,9 @@ class MenuState extends ExtensibleState
 		{
 			switch (textGroup.members[selection].text)
 			{
-				case "Configure Controls":
+				case "Set Keybinds":
 					openSubState(new states.substates.ControlsSubstate());
-				case "Leave Settings":
+				case "Save and Leave":
 					FlxG.switchState(new PlayState());
 				default:
 					Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));

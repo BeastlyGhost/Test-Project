@@ -6,6 +6,9 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import states.ExtensibleState.ExtensibleSubstate;
 
+/**
+ * The Controls Substate, used for setting up custom keybinds for game actions and such
+**/
 class ControlsSubstate extends ExtensibleSubstate
 {
 	var textGroup:FlxTypedGroup<FlxText>;

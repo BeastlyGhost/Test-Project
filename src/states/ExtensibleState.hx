@@ -7,17 +7,17 @@ import flixel.math.FlxMath;
 /**
  * a State that is widely used by the other game states
  * it contains useful tools that can be used by every other state
- */
+**/
 class ExtensibleState extends FlxState
 {
 	/*
 		Defines the Current Selected Item on a State
-	 */
+	**/
 	public var selection:Int = 0;
 
 	/*
 		Defines the `selection` limits
-	 */
+	**/
 	public var wrappableGroup:Array<Dynamic> = [];
 
 	override public function create()
@@ -43,12 +43,12 @@ class ExtensibleSubstate extends FlxSubState
 {
 	/*
 		Defines the Current Selected Item on a State
-	 */
+	**/
 	public var selection:Int = 0;
 
 	/*
 		Defines the `selection` limits
-	 */
+	**/
 	public var wrappableGroup:Array<Dynamic> = [];
 
 	override public function create()
