@@ -24,7 +24,7 @@ class Assets
 	public static var mappedSounds:Map<String, Sound> = [];
 
 	/*
-		Stores every tracked asset on an Array, useful for cleaning up later on
+		Stores every tracked asset in an Array, useful for cleaning up later on
 	 */
 	public static var trackedAssets:Array<String> = [];
 
