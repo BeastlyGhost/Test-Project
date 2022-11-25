@@ -120,7 +120,11 @@ class AssetHandler
 		return mappedAssets[SOUND].get(outputDir).data;
 	}
 
-	public static function clear(clearMappedImages:Bool = false)
+	/**
+	 * [Simply put, this clears all tracked assets that exist on the `trackedAssets` array]
+	 * @param clearMappedImages whether images should also be cleared along with sounds
+	 */
+	public static function clear(clearMappedImages:Bool)
 	{
 		if (clearMappedImages)
 		{
