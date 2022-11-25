@@ -73,7 +73,7 @@ class MenuState extends ExtensibleState
 		});
 
 		if (newSelection != 0)
-			FlxG.sound.play(Assets.getAsset("ui-changeSelection", SOUND, "sounds"));
+			FlxG.sound.play(AssetHandler.grabAsset("ui-changeSelection", SOUND, "sounds"));
 
 		var currentSelection:Int = 0;
 		for (text in textGroup.members)

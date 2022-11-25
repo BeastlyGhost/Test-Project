@@ -75,13 +75,13 @@ class Start extends FlxState
 		if (skip)
 			return FlxG.switchState(cast Type.createInstance(Main.game.initialState, []));
 
-		var bianca:FlxSprite = new FlxSprite().loadGraphic(Assets.getAsset("biancaSplash", IMAGE, "images/UI"));
+		var bianca:FlxSprite = new FlxSprite().loadGraphic(AssetHandler.grabAsset("biancaSplash", IMAGE, "images/UI"));
 		bianca.setGraphicSize(Std.int(bianca.width * 0.6));
 		bianca.screenCenter(XY);
 		bianca.x -= 20;
 		add(bianca);
 
-		FlxG.sound.play(Assets.getAsset("ui-splashRingSound", SOUND, "sounds"));
+		FlxG.sound.play(AssetHandler.grabAsset("ui-splashRingSound", SOUND, "sounds"));
 
 		FlxTween.tween(bianca, {alpha: 0}, 2, {
 			onComplete: t ->

@@ -22,7 +22,8 @@ class ExtensibleState extends FlxState
 
 	override public function create()
 	{
-		Assets.clear();
+		// clear sound cache
+		AssetHandler.clear();
 
 		super.create();
 	}

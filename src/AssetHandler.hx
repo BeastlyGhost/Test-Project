@@ -1,6 +1,6 @@
 package;
 
-import openfl.Assets as OpenAssets;
+import openfl.Assets;
 import openfl.media.Sound;
 import sys.FileSystem;
 
@@ -16,7 +16,7 @@ enum AssetType
 /**
  * This is the Assets Class, meant to allow access to assets, and manage used ones
  */
-class Assets
+class AssetHandler
 {
 	/*
 		Stores Tracked Sounds on a Map
@@ -35,14 +35,14 @@ class Assets
 	 * @param directory the directory we should look for the specified asset name
 	 * @return your asset path along with the asset and its extensions (if null, then nothing)
 	 */
-	public static function getAsset(asset:String, type:AssetType, directory:String):Dynamic
+	public static function grabAsset(asset:String, type:AssetType, directory:String):Dynamic
 	{
 		//
-		var path = mainPath('$directory/$asset', type);
+		var path = grabRoot('$directory/$asset', type);
 		switch (type)
 		{
 			case SOUND:
-				return getSound(path);
+				return grabSound(path);
 			default:
 				if (FileSystem.exists(path))
 					return path;
@@ -56,7 +56,7 @@ class Assets
 	 * @param outputDir the directory we should look for
 	 * @return uses OpenFL's sound feature to return a sound from the specified directory
 	 */
-	public static function getSound(outputDir:String):Sound
+	public static function grabSound(outputDir:String):Sound
 	{
 		if (!mappedSounds.exists(outputDir))
 			mappedSounds.set(outputDir, Sound.fromFile(outputDir));
@@ -71,7 +71,7 @@ class Assets
 		{
 			if (soundAsset != null && !trackedAssets.contains(soundAsset))
 			{
-				OpenAssets.cache.clear(soundAsset);
+				Assets.cache.clear(soundAsset);
 				mappedSounds.remove(soundAsset);
 			}
 
@@ -85,7 +85,7 @@ class Assets
 	 * @param type the type of asset you need, leave it as blank for returning a directory instead
 	 * @return the main assets directory with a specified subdirectory (and extension, if type is given)
 	 */
-	public static function mainPath(directory:String, ?type:AssetType):String
+	public static function grabRoot(directory:String, ?type:AssetType):String
 	{
 		//
 		var dir:String = '';
