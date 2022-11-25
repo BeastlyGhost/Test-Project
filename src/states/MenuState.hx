@@ -15,6 +15,7 @@ class MenuState extends ExtensibleState
 	var selector:FlxText;
 	var textGroup:FlxTypedGroup<FlxText>;
 	var menuOptions:Array<String> = [
+		"Anti-aliasing",
 		"Show Framerate",
 		"Show Memory",
 		"Show Objects",
@@ -64,6 +65,7 @@ class MenuState extends ExtensibleState
 					FlxG.switchState(new PlayState());
 				default:
 					Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
+					Start.updatePrefs();
 			}
 		}
 	}

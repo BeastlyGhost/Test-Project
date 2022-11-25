@@ -18,24 +18,11 @@ class Start extends FlxState
 	**/
 	public static var preferences:Map<String, Dynamic> = [
 		//
+		"Anti-aliasing" => true,
 		"Show Framerate" => true,
 		"Show Memory" => true,
 		"Show Objects" => false,
 	];
-
-	/**
-	 * [Returns the specified preference from within the preferences map]
-	 * @param name the `name` of your desired preference
-	 * @return the default / current parameter for your preference
-	**/
-	public static function getPref(name:String)
-	{
-		if (preferences.exists(name))
-			return preferences.get(name);
-		//
-		trace('Preference "$name" does not exist in the preferences map.');
-		return null;
-	}
 
 	/**
 	 * [Saves your game preferences with "Ghost" as the save file name]
@@ -55,6 +42,31 @@ class Start extends FlxState
 		FlxG.save.bind("Ghost");
 		if (FlxG.save.data.preferences != null)
 			preferences = FlxG.save.data.preferences;
+
+		updatePrefs();
+	}
+
+	/**
+	 * [Returns the specified preference from within the preferences map]
+	 * @param name the `name` of your desired preference
+	 * @return the default / current parameter for your preference
+	**/
+	public static function getPref(name:String)
+	{
+		if (preferences.exists(name))
+			return preferences.get(name);
+		//
+		trace('Preference "$name" does not exist in the preferences map.');
+		return null;
+	}
+
+	/**
+	 * [Updates default game preferences data if needed]
+	**/
+	public static function updatePrefs()
+	{
+		FlxSprite.defaultAntialiasing = getPref('Anti-aliasing');
+		trace('Sprite Antialiasing State: ' + FlxSprite.defaultAntialiasing);
 	}
 
 	override public function create()

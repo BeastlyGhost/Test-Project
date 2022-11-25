@@ -2,12 +2,14 @@ package;
 
 import flixel.FlxG;
 import flixel.graphics.FlxGraphic;
+import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.media.Sound;
 import openfl.system.System;
 import sys.FileSystem;
+import sys.io.File;
 
 /**
  * Enumerator for Asset Types, right now, there isn't much going on with this
@@ -16,6 +18,8 @@ import sys.FileSystem;
 enum AssetType
 {
 	IMAGE;
+	SPARROW;
+	PACKER;
 	VIDEO;
 	SOUND;
 	FONT;
@@ -76,6 +80,12 @@ class AssetHandler
 		var path = grabRoot('$directory/$asset', type);
 		switch (type)
 		{
+			case SPARROW:
+				var spr:FlxGraphic = grabGraphic(path);
+				return (FlxAtlasFrames.fromSparrow(spr, File.getContent(path)));
+			case PACKER:
+				var spr:FlxGraphic = grabGraphic(path);
+				return (FlxAtlasFrames.fromSpriteSheetPacker(spr, File.getContent(path)));
 			case IMAGE:
 				return grabGraphic(path);
 			case SOUND:
@@ -89,19 +99,29 @@ class AssetHandler
 	}
 
 	/**
-	 * [Returns a graphic asset from the specified directory]
+	 * [Stores a graphic asset from the specified directory]
 	 * @param outputDir the directory we should look for
 	 * @return uses FlxGraphic's `fromBitmapData` function to return your graphic asset
 	**/
-	public static function grabGraphic(outputDir:String):FlxGraphic
+	public static function grabGraphic(outputDir:String)
 	{
+		var myGraphic:FlxGraphic = FlxGraphic.fromAssetKey(outputDir, false, null, false);
 		if (!mappedAssets[IMAGE].exists(outputDir))
-		{
-			var myGraphic:BitmapData = BitmapData.fromFile(outputDir);
-			mappedAssets[IMAGE].set(outputDir, {type: IMAGE, data: FlxGraphic.fromBitmapData(myGraphic, false, outputDir, false)});
-			trackedAssets.push(outputDir);
+			mappedAssets[IMAGE].set(outputDir, {type: IMAGE, data: myGraphic});
+		return returnGraphic(outputDir);
+	}
+
+	/**
+	 * [Returns a graphic asset from the specified directory]
+	 * @param outputDir the directory we should look for
+	 * @return the output graphic from within the mapped assets map
+	**/
+	public static function returnGraphic(outputDir:String):FlxGraphic
+	{
+		if (FlxG.bitmap.checkCache(outputDir))
+			return FlxG.bitmap.get(outputDir);
+		else if (mappedAssets[IMAGE].exists(outputDir))
 			return mappedAssets[IMAGE].get(outputDir).data;
-		}
 
 		trace('graphic asset is returning null at $outputDir');
 		return null;
@@ -201,6 +221,10 @@ class AssetHandler
 				extensions = [".ttf", ".otf"];
 			case SOUND:
 				extensions = ['.ogg', '.wav'];
+			case SPARROW:
+				extensions = ['.xml'];
+			case PACKER:
+				extensions = ['.txt'];
 			default:
 				//
 		}
