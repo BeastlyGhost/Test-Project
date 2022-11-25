@@ -18,7 +18,7 @@ enum AssetType
 	FONT;
 }
 
-// Typedefine for Caching specific assets
+// Typedefine for Cached Assets, simply put, it defines what `type` a asset is, and what data it comes with
 typedef CacheableAsset =
 {
 	var type:AssetType;
