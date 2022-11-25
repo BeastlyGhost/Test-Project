@@ -1,7 +1,12 @@
 package;
 
+import flixel.FlxG;
+import flixel.graphics.FlxGraphic;
 import openfl.Assets;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
 import openfl.media.Sound;
+import openfl.system.System;
 import sys.FileSystem;
 
 // Enumerator for Asset Types;
@@ -13,20 +18,44 @@ enum AssetType
 	FONT;
 }
 
+// Typedefine for Caching specific assets
+typedef CacheableAsset =
+{
+	var type:AssetType;
+	var data:Dynamic;
+}
+
 /**
  * This is the Assets Class, meant to allow access to assets, and manage used ones
  */
 class AssetHandler
 {
 	/*
-		Stores Tracked Sounds on a Map
+		Stores Tracked Assets on a Map
+
+		-----------------------
+		I have yet to understand how asset managment works properly
+		so if this looks weird, that's because it might be, i've decided that
+		instead of creating multiple maps for various type of assets
+		having a single one could be somewhat easier to manage
+		@BeastlyGhost
 	 */
-	public static var mappedSounds:Map<String, Sound> = [];
+	public static var mappedAssets:Map<AssetType, Map<String, CacheableAsset>> = [
+		//
+		IMAGE => new Map<String, CacheableAsset>(),
+		SOUND => new Map<String, CacheableAsset>(),
+		VIDEO => new Map<String, CacheableAsset>(),
+	];
 
 	/*
 		Stores every tracked asset in an Array, useful for cleaning up later on
 	 */
 	public static var trackedAssets:Array<String> = [];
+
+	/*
+		Stores only user-preferred assets that shoud not be cleared when `clear` is called
+	 */
+	public static var persistentAssets:Array<String> = [];
 
 	/**
 	 * [Returns a specified asset]
@@ -51,6 +80,20 @@ class AssetHandler
 		return null;
 	}
 
+	public static function grabImage(outputDir:String):FlxGraphic
+	{
+		if (!mappedAssets[IMAGE].exists(outputDir))
+		{
+			var myGraphic:BitmapData = BitmapData.fromFile(outputDir);
+			mappedAssets[IMAGE].set(outputDir, {type: IMAGE, data: FlxGraphic.fromBitmapData(myGraphic, false, outputDir, false)});
+			trackedAssets.push(outputDir);
+			return mappedAssets[IMAGE].get(outputDir).data;
+		}
+
+		trace('graphic asset is returning null at $outputDir');
+		return null;
+	}
+
 	/**
 	 * [Returns a sound from the specified directory]
 	 * @param outputDir the directory we should look for
@@ -58,21 +101,49 @@ class AssetHandler
 	 */
 	public static function grabSound(outputDir:String):Sound
 	{
-		if (!mappedSounds.exists(outputDir))
-			mappedSounds.set(outputDir, Sound.fromFile(outputDir));
+		if (!mappedAssets[SOUND].exists(outputDir))
+			mappedAssets[SOUND].set(outputDir, {type: SOUND, data: Sound.fromFile(outputDir)});
 		trackedAssets.push(outputDir);
-
-		return mappedSounds.get(outputDir);
+		return mappedAssets[SOUND].get(outputDir).data;
 	}
 
-	public static function clear()
+	public static function clear(clearMappedImages:Bool = false)
 	{
-		for (soundAsset in mappedSounds.keys())
+		if (clearMappedImages)
 		{
-			if (soundAsset != null && !trackedAssets.contains(soundAsset))
+			for (asset in mappedAssets[IMAGE].keys())
 			{
-				Assets.cache.clear(soundAsset);
-				mappedSounds.remove(soundAsset);
+				if (!persistentAssets.contains(asset) && !trackedAssets.contains(asset))
+				{
+					// grab the image asset
+					var image = mappedAssets[IMAGE].get(asset);
+					if (image != null)
+					{
+						@:privateAccess
+						if (Assets.cache.hasBitmapData(image.data))
+						{
+							// remove it from the assets cache if it exists
+							Assets.cache.removeBitmapData(image.data);
+							FlxG.bitmap._cache.remove(image.data);
+						}
+
+						// and remove it from the mapped assets
+						image.data.destroy();
+						mappedAssets[IMAGE].remove(asset);
+					}
+				}
+			}
+
+			// run the system garbage collector
+			System.gc();
+		}
+
+		for (asset in mappedAssets[SOUND].keys())
+		{
+			if (asset != null && !persistentAssets.contains(asset) && !trackedAssets.contains(asset))
+			{
+				Assets.cache.clear(asset);
+				mappedAssets[SOUND].remove(asset);
 			}
 
 			trackedAssets = [];
