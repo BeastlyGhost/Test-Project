@@ -22,6 +22,8 @@ class ExtensibleState extends FlxState
 
 	override public function create()
 	{
+		Assets.clear();
+
 		super.create();
 	}
 

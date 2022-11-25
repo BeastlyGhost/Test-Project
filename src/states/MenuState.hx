@@ -7,11 +7,17 @@ import flixel.text.FlxText;
 
 class MenuState extends ExtensibleState
 {
-	public var selector:FlxText;
-	public var textGroup:FlxTypedGroup<FlxText>;
-	public var menuOptions:Array<String> = ["Show Framerate", "Show Memory", "Show Objects", "Leave Settings"];
+	var selector:FlxText;
+	var textGroup:FlxTypedGroup<FlxText>;
+	var menuOptions:Array<String> = [
+		"Show Framerate",
+		"Show Memory",
+		"Show Objects",
+		"Configure Controls",
+		"Leave Settings"
+	];
 
-	override public function create()
+	override function create()
 	{
 		super.create();
 
@@ -34,7 +40,7 @@ class MenuState extends ExtensibleState
 		updateSelection();
 	}
 
-	override public function update(elapsed:Float)
+	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
@@ -45,14 +51,19 @@ class MenuState extends ExtensibleState
 
 		if (Controls.getPressEvent("accept"))
 		{
-			if (textGroup.members[selection].text == "Leave Settings")
-				FlxG.switchState(new PlayState());
-			else
-				Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
+			switch (textGroup.members[selection].text)
+			{
+				case "Configure Controls":
+					openSubState(new states.substates.ControlsSubstate());
+				case "Leave Settings":
+					FlxG.switchState(new PlayState());
+				default:
+					Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
+			}
 		}
 	}
 
-	override public function updateSelection(newSelection:Int = 0)
+	override function updateSelection(newSelection:Int = 0)
 	{
 		super.updateSelection(newSelection);
 
@@ -60,6 +71,9 @@ class MenuState extends ExtensibleState
 		{
 			button.color = 0xFFFFFFFF;
 		});
+
+		if (newSelection != 0)
+			FlxG.sound.play(Assets.getAsset("ui-changeSelection", SOUND, "sounds"));
 
 		var currentSelection:Int = 0;
 		for (text in textGroup.members)

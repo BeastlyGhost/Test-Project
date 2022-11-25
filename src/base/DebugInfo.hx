@@ -1,7 +1,6 @@
 package base;
 
 import haxe.Timer;
-import openfl.display.FPS;
 import openfl.events.Event;
 import openfl.system.System;
 import openfl.text.TextField;
@@ -26,7 +25,7 @@ class DebugInfo extends TextField
 		autoSize = LEFT;
 		selectable = false;
 
-		defaultTextFormat = new TextFormat(Assets.getAsset("vcr", FONT, "fonts"), 16, -1);
+		defaultTextFormat = new TextFormat(Assets.getAsset("vcr", FONT, "data/fonts"), 16, -1);
 		text = "";
 
 		width = 150;
