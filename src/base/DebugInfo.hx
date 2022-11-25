@@ -25,7 +25,7 @@ class DebugInfo extends TextField
 		autoSize = LEFT;
 		selectable = false;
 
-		defaultTextFormat = new TextFormat(AssetHandler.grabAsset("vcr", FONT, "data/fonts"), 16, -1);
+		defaultTextFormat = new TextFormat("_sans", 16, -1);
 		text = "";
 
 		width = 150;
@@ -65,7 +65,7 @@ class DebugInfo extends TextField
 		{
 			text = ""
 				+ (Start.getPref("Show Framerate") ? '${times.length} FPS\n' : '')
-				+ (Start.getPref("Show Memory") ? '${getInterval(memory)} // ${getInterval(memoryTotal)}\n' : '')
+				+ (Start.getPref("Show Memory") ? '${getInterval(memory)} / ${getInterval(memoryTotal)}\n' : '')
 				+ (Start.getPref("Show Objects") ? 'Class Object Count: ${flixel.FlxG.state.members.length}\n' : '');
 		}
 	}

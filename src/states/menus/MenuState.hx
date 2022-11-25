@@ -1,4 +1,4 @@
-package states;
+package states.menus;
 
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -62,7 +62,7 @@ class MenuState extends ExtensibleState
 				case "Set Keybinds":
 					openSubState(new states.substates.ControlsSubstate());
 				case "Save and Leave":
-					FlxG.switchState(new PlayState());
+					FlxG.switchState(new states.game.PlayState());
 				default:
 					Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
 					Start.updatePrefs();

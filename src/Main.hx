@@ -10,7 +10,7 @@ class Main extends Sprite
 	public static var game = {
 		width: 640, // the game window width
 		height: 480, // the game window height
-		initialState: states.MenuState, // the game's initial state (shown after boot splash)
+		initialState: states.menus.TitleState, // the game's initial state (shown after boot splash)
 		framerate: 120, // the game's default framerate
 		skipSplash: false, // whether the game boot splash should be skipped
 		fullscreen: false, // whether the game should start at fullscreen

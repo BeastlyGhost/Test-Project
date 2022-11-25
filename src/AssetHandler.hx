@@ -41,7 +41,7 @@ typedef CacheableAsset =
 class AssetHandler
 {
 	/*
-		Stores only user-preferred assets that shoud not be cleared when `clear` is called
+		Stores only user-preferred assets that should not be cleared when `clear` is called
 	**/
 	public static var persistentAssets:Array<String> = [];
 
@@ -172,7 +172,7 @@ class AssetHandler
 			}
 
 			// run the system garbage collector
-			System.gc();
+			System.gc(); // the one i'm using
 		}
 
 		for (asset in mappedAssets[SOUND].keys())

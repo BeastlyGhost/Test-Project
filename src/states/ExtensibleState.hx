@@ -1,14 +1,16 @@
 package states;
 
-import flixel.FlxState;
+import base.Transition;
 import flixel.FlxSubState;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxMath;
 
 /**
  * a State that is widely used by the other game states
  * it contains useful tools that can be used by every other state
 **/
-class ExtensibleState extends FlxState
+class ExtensibleState extends FlxUIState
 {
 	/*
 		Defines the Current Selected Item on a State
@@ -24,6 +26,12 @@ class ExtensibleState extends FlxState
 	{
 		// clear assets cache
 		AssetHandler.clear(true);
+
+		/*
+			// play the game transition
+			if (!FlxTransitionableState.skipNextTransOut)
+				openSubState(new Transition(0.5, true));
+		 */
 
 		super.create();
 	}
