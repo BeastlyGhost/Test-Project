@@ -172,7 +172,7 @@ class AssetHandler
 			}
 
 			// run the system garbage collector
-			System.gc(); // the one i'm using
+			System.gc();
 		}
 
 		for (asset in mappedAssets[SOUND].keys())
