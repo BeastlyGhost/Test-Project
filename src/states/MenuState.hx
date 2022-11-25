@@ -9,7 +9,7 @@ class MenuState extends ExtensibleState
 {
 	public var selector:FlxText;
 	public var textGroup:FlxTypedGroup<FlxText>;
-	public var menuOptions:Array<String> = ["Show Framerate", "Show Memory", "Leave Settings"];
+	public var menuOptions:Array<String> = ["Show Framerate", "Show Memory", "Show Objects", "Leave Settings"];
 
 	override public function create()
 	{

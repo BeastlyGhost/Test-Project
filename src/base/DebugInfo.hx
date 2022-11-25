@@ -64,12 +64,10 @@ class DebugInfo extends TextField
 
 		if (visible)
 		{
-			text = ""; // reset to default;
-
-			if (Start.getPref("Show Framerate"))
-				text += '${times.length} FPS\n';
-			if (Start.getPref("Show Memory"))
-				text += '${getInterval(memory)} // ${getInterval(memoryTotal)}';
+			text = ""
+				+ (Start.getPref("Show Framerate") ? '${times.length} FPS\n' : '')
+				+ (Start.getPref("Show Memory") ? '${getInterval(memory)} // ${getInterval(memoryTotal)}\n' : '')
+				+ (Start.getPref("Show Objects") ? 'Class Object Count: ${flixel.FlxG.state.members.length}\n' : '');
 		}
 	}
 }

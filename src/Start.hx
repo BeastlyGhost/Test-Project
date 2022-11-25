@@ -12,10 +12,15 @@ import flixel.tweens.FlxTween;
  */
 class Start extends FlxState
 {
+	/*
+		the Preferences Map sets up settings and default setting parameters
+		it can be used alongside a menu for changing said paramaters to new ones
+	 */
 	public static var preferences:Map<String, Dynamic> = [
 		//
-		"Show Framerate" => false,
+		"Show Framerate" => true,
 		"Show Memory" => true,
+		"Show Objects" => false,
 	];
 
 	/**
@@ -32,6 +37,9 @@ class Start extends FlxState
 		return null;
 	}
 
+	/**
+	 * [Saves your game preferences with "Ghost" as the save file name]
+	 */
 	public static function savePrefs()
 	{
 		FlxG.save.bind("Ghost");
@@ -39,6 +47,9 @@ class Start extends FlxState
 		// FlxG.save.data.flush();
 	}
 
+	/**
+	 * [Loads your game preferences with "Ghost" as the save file name]
+	 */
 	public static function loadPrefs()
 	{
 		FlxG.save.bind("Ghost");
@@ -56,11 +67,14 @@ class Start extends FlxState
 		FlxG.mouse.useSystemCursor = true;
 		FlxG.mouse.visible = false;
 
-		triggerSplash();
+		triggerSplash(Main.game.skipSplash);
 	}
 
-	function triggerSplash():Void
+	function triggerSplash(skip:Bool):Void
 	{
+		if (skip)
+			return FlxG.switchState(cast Type.createInstance(Main.game.initialState, []));
+
 		var bianca:FlxSprite = new FlxSprite().loadGraphic(Assets.getAsset("test-image", IMAGE, "images"));
 		bianca.setGraphicSize(Std.int(bianca.width * 0.6));
 		bianca.screenCenter(XY);
@@ -70,11 +84,11 @@ class Start extends FlxState
 		FlxG.sound.play(Assets.getAsset("test-sound", SOUND, "sounds"));
 
 		FlxTween.tween(bianca, {alpha: 0}, 2, {
-			ease: FlxEase.sineOut,
 			onComplete: t ->
 			{
-				FlxG.switchState(cast Type.createInstance(Main.initialState, []));
-			}
+				FlxG.switchState(cast Type.createInstance(Main.game.initialState, []));
+			},
+			ease: FlxEase.sineOut
 		});
 	}
 }
