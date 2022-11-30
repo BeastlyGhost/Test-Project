@@ -32,7 +32,7 @@ class ExtensibleState extends FlxUIState
 
 		// play the transition if we are allowed to
 		if (!FlxTransitionableState.skipNextTransOut)
-			Transition.start(0.3, false, Fade, FlxEase.linear);
+			Transition.start(0.3, false, FlxEase.linear);
 
 		super.create();
 	}
@@ -44,7 +44,7 @@ class ExtensibleState extends FlxUIState
 	{
 		if (!FlxTransitionableState.skipNextTransIn)
 		{
-			Transition.start(0.3, true, Fade, FlxEase.linear, function()
+			Transition.start(0.3, true, FlxEase.linear, function()
 			{
 				FlxG.switchState(state);
 			});
@@ -62,7 +62,7 @@ class ExtensibleState extends FlxUIState
 	{
 		if (!skipTransition)
 		{
-			Transition.start(0.3, true, Fade, FlxEase.linear, function()
+			Transition.start(0.3, true, FlxEase.linear, function()
 			{
 				FlxG.resetState();
 			});
