@@ -42,7 +42,7 @@ class TitleState extends ExtensibleState
 			FlxG.sound.play(AssetHandler.grabAsset("ui-changeSelection", SOUND, "sounds"));
 			new FlxTimer().start(1, function(timer:FlxTimer)
 			{
-				FlxG.switchState(new MenuState());
+				ExtensibleState.switchState(new MenuState());
 			});
 		}
 	}
