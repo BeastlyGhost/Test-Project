@@ -7,8 +7,8 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 
 /**
- * Debug Info class for displaying Framerate and Memory information on screen
- * based on this tutorial https://keyreal-code.github.io/haxecoder-tutorials/17_displaying_fps_and_memory_usage_using_openfl.html
+	Debug Info class for displaying Framerate and Memory information on screen
+	based on this tutorial https://keyreal-code.github.io/haxecoder-tutorials/17_displaying_fps_and_memory_usage_using_openfl.html
 **/
 class DebugInfo extends TextField
 {
@@ -25,7 +25,7 @@ class DebugInfo extends TextField
 		autoSize = LEFT;
 		selectable = false;
 
-		defaultTextFormat = new TextFormat("_sans", 16, -1);
+		defaultTextFormat = new TextFormat("_sans", 15, -1);
 		text = "";
 
 		width = 150;
@@ -64,9 +64,9 @@ class DebugInfo extends TextField
 		if (visible)
 		{
 			text = ""
-				+ (Start.getPref("Show Framerate") ? '${times.length} FPS\n' : '')
-				+ (Start.getPref("Show Memory") ? '${getInterval(memory)} / ${getInterval(memoryTotal)}\n' : '')
-				+ (Start.getPref("Show Objects") ? 'Class Object Count: ${flixel.FlxG.state.members.length}\n' : '');
+				+ (Start.getPref("Show Framerate") ? 'FPS: ${times.length}\n' : '')
+				+ (Start.getPref("Show Memory") ? 'Memory: ${getInterval(memory)}\nMemory Peak: ${getInterval(memoryTotal)}\n' : '')
+				+ (Start.getPref("Show Objects") ? 'Object Count: ${flixel.FlxG.state.members.length}\n' : '');
 		}
 	}
 }

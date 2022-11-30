@@ -6,9 +6,9 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 
 /**
- * the Menu State serves as a base menu that will be expanded later on
- * right now, it simply shows text options that do a specific action
- * such as toggling the framerate counter, or setting your keybinds
+	 the Menu State serves as a base menu that will be expanded later on
+	*right now, it simply shows text options that do a specific action
+	 such as toggling the framerate counter, or setting your keybinds
 **/
 class MenuState extends ExtensibleState
 {

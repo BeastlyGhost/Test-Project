@@ -1,10 +1,13 @@
 package states;
 
 import base.Transition;
+import flixel.FlxG;
+import flixel.FlxState;
 import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxMath;
+import flixel.tweens.FlxEase;
 
 /**
  * a State that is widely used by the other game states
@@ -27,13 +30,46 @@ class ExtensibleState extends FlxUIState
 		// clear assets cache
 		AssetHandler.clear(true);
 
-		/*
-			// play the game transition
-			if (!FlxTransitionableState.skipNextTransOut)
-				openSubState(new Transition(0.5, true));
-		 */
+		// play the transition if we are allowed to
+		if (!FlxTransitionableState.skipNextTransOut)
+			Transition.start(0.3, false, Fade, FlxEase.linear);
 
 		super.create();
+	}
+
+	public static function boundFramerate(input:Float)
+		return input * (60 / FlxG.drawFramerate);
+
+	public static function switchState(state:FlxState)
+	{
+		if (!FlxTransitionableState.skipNextTransIn)
+		{
+			Transition.start(0.3, true, Fade, FlxEase.linear, function()
+			{
+				FlxG.switchState(state);
+			});
+			return;
+		}
+		else
+		{
+			FlxTransitionableState.skipNextTransIn = false;
+			FlxTransitionableState.skipNextTransOut = false;
+			FlxG.switchState(state);
+		}
+	}
+
+	public static function resetState(?skipTransition:Bool)
+	{
+		if (!skipTransition)
+		{
+			Transition.start(0.3, true, Fade, FlxEase.linear, function()
+			{
+				FlxG.resetState();
+			});
+			return;
+		}
+		else
+			FlxG.resetState();
 	}
 
 	override public function update(elapsed:Float)

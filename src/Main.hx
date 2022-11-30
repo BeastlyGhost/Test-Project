@@ -24,7 +24,7 @@ class Main extends Sprite
 		super();
 
 		// initialize the game controls for later use;
-		base.Controls.init();
+		Controls.init();
 
 		addChild(new FlxGame(game.width, game.height, Start, game.framerate, game.framerate, true, game.fullscreen));
 		addChild(new DebugInfo(0, 0));

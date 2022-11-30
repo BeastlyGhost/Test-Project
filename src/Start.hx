@@ -7,8 +7,8 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 
 /**
- * Starting Class for the game
- * used to set up useful functions and variables for the main game!
+	Starting Class for the game
+	used to set up useful functions and variables for the main game!
 **/
 class Start extends FlxState
 {
@@ -25,7 +25,7 @@ class Start extends FlxState
 	];
 
 	/**
-	 * [Saves your game preferences with "Ghost" as the save file name]
+		[Saves your game preferences with "Ghost" as the save file name]
 	**/
 	public static function savePrefs()
 	{
@@ -35,7 +35,7 @@ class Start extends FlxState
 	}
 
 	/**
-	 * [Loads your game preferences with "Ghost" as the save file name]
+		[Loads your game preferences with "Ghost" as the save file name]
 	**/
 	public static function loadPrefs()
 	{
@@ -47,9 +47,9 @@ class Start extends FlxState
 	}
 
 	/**
-	 * [Returns the specified preference from within the preferences map]
-	 * @param name the `name` of your desired preference
-	 * @return the default / current parameter for your preference
+		[Returns the specified preference from within the preferences map]
+		 @param name the `name` of your desired preference
+		 @return the default / current parameter for your preference
 	**/
 	public static function getPref(name:String)
 	{
@@ -61,7 +61,7 @@ class Start extends FlxState
 	}
 
 	/**
-	 * [Updates default game preferences data if needed]
+		[Updates default game preferences data if needed]
 	**/
 	public static function updatePrefs()
 	{

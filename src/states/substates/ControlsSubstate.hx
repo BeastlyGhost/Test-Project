@@ -7,7 +7,7 @@ import flixel.text.FlxText;
 import states.ExtensibleState.ExtensibleSubstate;
 
 /**
- * The Controls Substate, used for setting up custom keybinds for game actions and such
+	The Controls Substate, used for setting up custom keybinds for game actions and such
 **/
 class ControlsSubstate extends ExtensibleSubstate
 {

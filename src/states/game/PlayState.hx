@@ -4,7 +4,7 @@ import flixel.FlxG;
 import flixel.text.FlxText;
 
 /**
- * Main Playable State, handles gameplay and visuals for the game;
+	Main Playable State, handles gameplay and visuals for the game;
 **/
 class PlayState extends ExtensibleState
 {
