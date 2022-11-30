@@ -65,7 +65,9 @@ class Start extends FlxState
 	**/
 	public static function updatePrefs()
 	{
+		#if (flixel >= "5.0.0")
 		FlxSprite.defaultAntialiasing = getPref('Anti-aliasing');
+		#end
 		trace('Sprite Antialiasing State: ' + FlxSprite.defaultAntialiasing);
 	}
 
