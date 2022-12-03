@@ -10,7 +10,7 @@ import openfl.text.TextFormat;
 	Debug Info class for displaying Framerate and Memory information on screen
 	based on this tutorial https://keyreal-code.github.io/haxecoder-tutorials/17_displaying_fps_and_memory_usage_using_openfl.html
 **/
-class DebugInfo extends TextField
+class FPS extends TextField
 {
 	public var times:Array<Float> = [];
 	public var memoryTotal:UInt = 0;
@@ -66,7 +66,7 @@ class DebugInfo extends TextField
 			text = ""
 				+ (Start.getPref("Show Framerate") ? 'FPS: ${times.length}\n' : '')
 				+ (Start.getPref("Show Memory") ? 'Memory: ${getInterval(memory)}\nMemory Peak: ${getInterval(memoryTotal)}\n' : '')
-				+ (Start.getPref("Show Objects") ? 'Object Count: ${flixel.FlxG.state.members.length}\n' : '');
+				+ (Start.getPref("Show Debug") ? 'Class: ${Main.currentState}\nObject Count: ${flixel.FlxG.state.members.length}\n' : '');
 		}
 	}
 }

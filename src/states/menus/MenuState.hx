@@ -18,7 +18,7 @@ class MenuState extends ExtensibleState
 		"Anti-aliasing",
 		"Show Framerate",
 		"Show Memory",
-		"Show Objects",
+		"Show Debug",
 		"Set Keybinds",
 		"Save and Leave"
 	];
@@ -62,7 +62,7 @@ class MenuState extends ExtensibleState
 				case "Set Keybinds":
 					openSubState(new states.substates.ControlsSubstate());
 				case "Save and Leave":
-					ExtensibleState.switchState(new states.game.PlayState());
+					ExtensibleState.switchState(new states.PlayState());
 				default:
 					Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
 					Start.updatePrefs();

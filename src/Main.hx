@@ -1,7 +1,8 @@
 package;
 
-import base.DebugInfo;
+import base.FPS;
 import flixel.FlxGame;
+import flixel.FlxState;
 import openfl.Lib;
 import openfl.display.Sprite;
 
@@ -17,6 +18,9 @@ class Main extends Sprite
 		fullscreen: false, // whether the game should start at fullscreen
 	};
 
+	// specifies the current state
+	public static var currentState:Class<FlxState> = states.menus.TitleState;
+
 	public static function main():Void
 		Lib.current.addChild(new Main());
 
@@ -28,6 +32,6 @@ class Main extends Sprite
 		Controls.init();
 
 		addChild(new FlxGame(game.width, game.height, Start, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, true, game.fullscreen));
-		addChild(new DebugInfo(0, 0));
+		addChild(new FPS(0, 0));
 	}
 }

@@ -21,7 +21,7 @@ class Start extends FlxState
 		"Anti-aliasing" => true,
 		"Show Framerate" => true,
 		"Show Memory" => true,
-		"Show Objects" => false,
+		"Show Debug" => false,
 	];
 
 	/**

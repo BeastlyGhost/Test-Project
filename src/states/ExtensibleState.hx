@@ -47,6 +47,7 @@ class ExtensibleState extends FlxUIState
 			Transition.start(0.3, true, FlxEase.linear, function()
 			{
 				FlxG.switchState(state);
+				Main.currentState = Type.getClass(state);
 			});
 			return;
 		}
@@ -85,14 +86,8 @@ class ExtensibleState extends FlxUIState
 
 class ExtensibleSubstate extends FlxSubState
 {
-	/*
-		Defines the Current Selected Item on a State
-	**/
 	public var selection:Int = 0;
 
-	/*
-		Defines the `selection` limits
-	**/
 	public var wrappableGroup:Array<Dynamic> = [];
 
 	override public function create()
