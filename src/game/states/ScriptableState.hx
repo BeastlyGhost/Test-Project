@@ -1,4 +1,4 @@
-package states;
+package game.states;
 
 import base.Transition;
 import flixel.FlxG;

@@ -1,10 +1,10 @@
-package states.substates;
+package game.substates;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
-import states.ScriptableState.ScriptableSubstate;
+import game.states.ScriptableState.ScriptableSubstate;
 
 /**
 	The Controls Substate, used for setting up custom keybinds for game actions and such

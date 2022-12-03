@@ -1,4 +1,4 @@
-package states.menus;
+package game.states.menus;
 
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -6,9 +6,9 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 
 /**
-	 the Menu State serves as a base menu that will be expanded later on
-	*right now, it simply shows text options that do a specific action
-	 such as toggling the framerate counter, or setting your keybinds
+	the Menu State serves as a base menu that will be expanded later on
+	right now, it simply shows text options that do a specific action
+	such as toggling the framerate counter, or setting your keybinds
 **/
 class MenuState extends ScriptableState
 {
@@ -60,9 +60,9 @@ class MenuState extends ScriptableState
 			switch (textGroup.members[selection].text)
 			{
 				case "Set Keybinds":
-					openSubState(new states.substates.ControlsSubstate());
+					openSubState(new game.substates.ControlsSubstate());
 				case "Save and Leave":
-					ScriptableState.switchState(new states.PlayState());
+					ScriptableState.switchState(new game.states.PlayState());
 				default:
 					Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
 					Start.updatePrefs();
