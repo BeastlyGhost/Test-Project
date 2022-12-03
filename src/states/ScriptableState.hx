@@ -10,17 +10,17 @@ import flixel.math.FlxMath;
 import flixel.tweens.FlxEase;
 
 /**
- * a State that is widely used by the other game states
- * it contains useful tools that can be used by every other state
+	a State that is widely used by the other game states
+	it contains useful tools that can be used by every other state
 **/
-class ExtensibleState extends FlxUIState
+class ScriptableState extends FlxUIState
 {
-	/*
+	/**
 		Defines the Current Selected Item on a State
 	**/
 	public var selection:Int = 0;
 
-	/*
+	/**
 		Defines the `selection` limits
 	**/
 	public var wrappableGroup:Array<Dynamic> = [];
@@ -84,7 +84,7 @@ class ExtensibleState extends FlxUIState
 	}
 }
 
-class ExtensibleSubstate extends FlxSubState
+class ScriptableSubstate extends FlxSubState
 {
 	public var selection:Int = 0;
 

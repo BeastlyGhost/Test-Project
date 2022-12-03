@@ -4,12 +4,12 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
-import states.ExtensibleState.ExtensibleSubstate;
+import states.ScriptableState.ScriptableSubstate;
 
 /**
 	The Controls Substate, used for setting up custom keybinds for game actions and such
 **/
-class ControlsSubstate extends ExtensibleSubstate
+class ControlsSubstate extends ScriptableSubstate
 {
 	var textGroup:FlxTypedGroup<FlxText>;
 	var controlOptions:Array<String> = ["Nothing", "for now"];

@@ -10,7 +10,7 @@ import flixel.text.FlxText;
 	*right now, it simply shows text options that do a specific action
 	 such as toggling the framerate counter, or setting your keybinds
 **/
-class MenuState extends ExtensibleState
+class MenuState extends ScriptableState
 {
 	var selector:FlxText;
 	var textGroup:FlxTypedGroup<FlxText>;
@@ -62,7 +62,7 @@ class MenuState extends ExtensibleState
 				case "Set Keybinds":
 					openSubState(new states.substates.ControlsSubstate());
 				case "Save and Leave":
-					ExtensibleState.switchState(new states.PlayState());
+					ScriptableState.switchState(new states.PlayState());
 				default:
 					Start.preferences.set(textGroup.members[selection].text, !Start.getPref(textGroup.members[selection].text));
 					Start.updatePrefs();

@@ -8,7 +8,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxTimer;
 import openfl.display.BlendMode;
 
-class TitleState extends ExtensibleState
+class TitleState extends ScriptableState
 {
 	private var lockedMovement:Bool = false;
 
@@ -42,7 +42,7 @@ class TitleState extends ExtensibleState
 			FlxG.sound.play(AssetHandler.grabAsset("ui-changeSelection", SOUND, "sounds"));
 			new FlxTimer().start(1, function(timer:FlxTimer)
 			{
-				ExtensibleState.switchState(new MenuState());
+				ScriptableState.switchState(new MenuState());
 			});
 		}
 	}

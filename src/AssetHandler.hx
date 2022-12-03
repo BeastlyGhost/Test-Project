@@ -61,7 +61,7 @@ class AssetHandler
 		VIDEO => new Map<String, CacheableAsset>(),
 	];
 
-	/*
+	/**
 		Stores every tracked asset in an Array, useful for cleaning up later on
 	**/
 	public static var trackedAssets:Array<String> = [];
