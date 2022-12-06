@@ -19,9 +19,7 @@ class TitleState extends ScriptableState
 	{
 		super.create();
 
-		var titleGrid:FlxGraphic = AssetHandler.grabAsset('titleGrid', IMAGE, 'images/menus');
-
-		movingBack = new FlxBackdrop(titleGrid, XY, 0, 0);
+		movingBack = new FlxBackdrop(AssetHandler.grabAsset('titleGrid', IMAGE, 'images/menus'), XY, 0, 0);
 		movingBack.alpha = 0.2;
 		movingBack.velocity.set(30, 0);
 		movingBack.blend = BlendMode.DIFFERENCE;
@@ -36,7 +34,7 @@ class TitleState extends ScriptableState
 	{
 		super.update(elapsed);
 
-		if (Controls.getPressEvent("accept") && !lockedMovement)
+		if (Controls.isJustPressed("accept") && !lockedMovement)
 		{
 			lockedMovement = true;
 			FlxG.sound.play(AssetHandler.grabAsset("ui-changeSelection", SOUND, "sounds"));
@@ -47,3 +45,4 @@ class TitleState extends ScriptableState
 		}
 	}
 }
+

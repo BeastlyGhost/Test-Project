@@ -50,12 +50,12 @@ class MenuState extends ScriptableState
 	{
 		super.update(elapsed);
 
-		if (Controls.getPressEvent("down"))
+		if (Controls.isJustPressed("down"))
 			updateSelection(1);
-		if (Controls.getPressEvent("up"))
+		if (Controls.isJustPressed("up"))
 			updateSelection(-1);
 
-		if (Controls.getPressEvent("accept"))
+		if (Controls.isJustPressed("accept"))
 		{
 			switch (textGroup.members[selection].text)
 			{
